@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <title>GitHub API Changes | GitHub Developer Guide</title>
+  
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
+  
+  <link href="/developer.eeme.io/assets/stylesheets/application.css" rel="stylesheet" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="/developer.eeme.io/assets/javascripts/application.js" type="text/javascript"></script>
+  
+  <script src="/developer.eeme.io/assets/javascripts/dev_mode.js" type="text/javascript"></script>
+  
+</head>
+
+
+<body class="blog">
+  
+
+<div id="header-wrapper">
+  <div id="header">
+    <div>
+      <a class="logo" href="/">GitHub:Developer</a>
+      <ul class="nav">
+        
+        <li><a href="/developer.eeme.io/v3/" class="nav-api">API</a></li>
+        <li><a href="/developer.eeme.io/program/" class="nav-developers">Developers</a></li>
+        <li><a href="/developer.eeme.io/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" /><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results">
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div><!-- #header -->
+</div><!-- #header-wrapper -->
+
+
+  <div id="wrapper">
+    <div class="content">
+      <div class="change" id="/changes/2016-06-14-repository-invitations/">
+  <h2 class="title">
+<a id="--api-changes-for-repository-invitations" class="anchor" href="#--api-changes-for-repository-invitations" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 14, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/CoralineAda.png" alt="Avatar for CoralineAda" data-proofer-ignore>
+      <a href="https://github.com/CoralineAda" data-proofer-ignore>CoralineAda</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We announced <a href="https://github.com/blog/2170-repository-invitations">repository invitation functionality</a> on May 23. Using the site, you can invite collaborators to work on your repository. Invitees will receive an email with the invitation and have the option to accept or decline.</p>
+
+<p>We have now have endpoints for managing repository invitations for both repository administrators and invitation recipients through the GitHub API. You can enable these changes during the preview period by providing a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.swamp-thing-preview
+</code></pre>
+
+<p>For example:</p>
+
+<pre class="command-line">
+curl "https://api.github.com/api/v3/repositories/1313/invitations" \
+  -H 'Authorization: token TOKEN' \
+  -H "Accept: application/vnd.github.swamp-thing-preview" \
+</pre>
+
+<p>You can learn more about the new endpoints in the updated <a href="/v3/repos/collaborators">Collaborators</a> and new <a href="/v3/repos/invitations">Repository Invitations</a> documentation.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Repository+Invitations+API+Preview">let us know</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2016-06-07-reactions-api-update/">
+  <h2 class="title">
+<a id="--reactions-api-preview-now-includes-user-information" class="anchor" href="#--reactions-api-preview-now-includes-user-information" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 7, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kneemer.png" alt="Avatar for kneemer" data-proofer-ignore>
+      <a href="https://github.com/kneemer" data-proofer-ignore>kneemer</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>To avoid making extra API calls, we've updated the <a href="/changes/2016-05-12-reactions-api-preview">Reactions API preview</a> to include additional user information when listing Reactions.</p>
+
+<p><strong>This is a breaking change for Reaction payloads</strong>. If you're trying out this new API during its preview period, you'll need to update your code to continue working with it.</p>
+
+<h2>
+<a id="json-payload-changes" class="anchor" href="#json-payload-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="json-payload-changes" class="anchor" href="#json-payload-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>JSON Payload Changes</h2>
+
+<p>We're replacing the <code>user_id</code> attribute with <code>user</code> and changing the schema type from a number to a JSON object.</p>
+
+<h2>
+<a id="example-reaction-json" class="anchor" href="#example-reaction-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="example-reaction-json" class="anchor" href="#example-reaction-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Reaction JSON</h2>
+
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heart"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<p>As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Reactions+API+Preview">get in touch</a>.</p>
+</div>
+
+<div class="change" id="/changes/2016-5-27-multiple-assignees/">
+  <h2 class="title">
+<a id="--api-changes-for-multiple-issue-assignees" class="anchor" href="#--api-changes-for-multiple-issue-assignees" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 27, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/nakajima.png" alt="Avatar for nakajima" data-proofer-ignore>
+      <a href="https://github.com/nakajima" data-proofer-ignore>nakajima</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>GitHub recently added the ability to assign up to ten people to issues. We're updating Issue payloads and adding a couple new endpoints to help you build apps. You can enable these changes during the preview period by providing a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.cerberus-preview
+</code></pre>
+
+<p>For example:</p>
+
+<pre class="command-line">
+curl "https://api.github.com/repos/github/hubot/issues" \
+  -H 'Authorization: token TOKEN' \
+  -H "Accept: application/vnd.github.cerberus-preview" \
+</pre>
+
+<p>The issues returned in this list will include the new <code>assignees</code> key.</p>
+
+<p>You can learn more about the new responses and endpoints in the updated <a href="/v3/issues">Issues</a> and <a href="/v3/issues/assignees">Issue Assignees</a> documentation.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Multiple+Assignees+API">let us know</a>!</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2016-05-23-timeline-preview-api/">
+  <h2 class="title">
+<a id="--preview-the-timeline-api" class="anchor" href="#--preview-the-timeline-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 23, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/nickh.png" alt="Avatar for nickh" data-proofer-ignore>
+      <a href="https://github.com/nickh" data-proofer-ignore>nickh</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We've added an API for issue timelines, which will let you fetch a list
+of events from an issue or pull request timeline.</p>
+
+<p>To access <a href="/v3/issues/timeline/">the Timeline API</a> during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.mockingbird-preview
+</code></pre>
+
+<p>During the preview period, we may change aspects of these API methods based on developer feedback. If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Timeline+API">let us know</a>!</p>
+</div>
+
+<div class="change" id="/changes/2016-05-12-reactions-api-preview/">
+  <h2 class="title">
+<a id="--preview-support-for-reactions-api" class="anchor" href="#--preview-support-for-reactions-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 12, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kneemer.png" alt="Avatar for kneemer" data-proofer-ignore>
+      <a href="https://github.com/kneemer" data-proofer-ignore>kneemer</a>
+  </li>
+</ul>
+</div>
+
+  <p>GitHub recently added <a href="https://github.com/blog/2119-add-reactions-to-pull-requests-issues-and-comments">Reactions to Pull Requests, Issues, and Comments</a> to help people express their feelings more simply and effectively in conversations. We are adding endpoints for Reactions so that you can now react and unreact via the API. You can enable these changes during the preview period by providing a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.squirrel-girl-preview
+</code></pre>
+
+<p>For example:</p>
+
+<p>To view reactions on an issue:</p>
+
+<pre class="command-line">
+<span class="command">curl "https://api.github.com/repos/github/hubot/issues/1/reactions" \</span>
+  -H "Accept: application/vnd.github.squirrel-girl-preview"
+</pre>
+
+<p>You can learn more about the new reaction response objects in the updated <a href="/v3/repos/comments#preview-period-commits-comments">Commit comment</a>, <a href="/v3/issues#preview-period-org-issues">Issue</a>, <a href="/v3/issues/comments#preview-period-issue-comments">Issue comment</a>, and <a href="/v3/pulls/comments#preview-period-pull-comments">Review Comment</a> documentation. There is also new <a href="/v3/reactions">Reaction</a> documentation.</p>
+
+<p>During the preview period, we may change aspects of these APIs based on developer feedback. We will announce the changes here on the developer blog, but we will not provide advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Reactions+API+Preview">let us know</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">
+  <h2 class="title">
+<a id="--source-import-api-enhancements-for-working-with-git-lfs" class="anchor" href="#--source-import-api-enhancements-for-working-with-git-lfs" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 3, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/lizzhale.png" alt="Avatar for lizzhale" data-proofer-ignore>
+      <a href="https://github.com/lizzhale" data-proofer-ignore>lizzhale</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Today we're introducing enhancements to the <a href="/v3/migration/source_imports/">Source Import API</a> to support importing repositories with files larger than 100MB.</p>
+
+<p><strong>Changes to parameters for starting an import</strong></p>
+
+<p><a href="/v3/migration/source_imports/#start-an-import">Starting an import</a> no longer requires a <code>vcs</code> parameter. Please be aware that without this parameter, the import job will take additional time to detect the vcs type before beginning the import. This detection step will be reflected in the response.</p>
+
+<p><strong>New methods</strong></p>
+
+<p>We've added 3 new methods that will enable API consumers to:</p>
+
+<ul>
+<li><p><a href="/v3/migration/source_imports/#update-existing-import">update</a> the authentication or project choice for an import. If no parameters are provided during the request, the import will be restarted. Please note that this is a <strong>breaking change</strong>. Updating authentication for the originating URL is no longer supported through the <a href="/v3/migration/source_imports/#start-an-import">start an import</a> method. Please update your applications to use the new method.</p></li>
+<li><p><a href="/v3/migration/source_imports/#set-git-lfs-preference">set their preference</a> for using Git LFS to import files larger than 100MB.</p></li>
+<li><p><a href="/v3/migration/source_imports/#get-large-files">list all the files larger than 100MB</a> that were found during the import.</p></li>
+</ul>
+
+<p><strong>New attributes for Git LFS</strong></p>
+
+<p>Several new response attributes (<code>use_lfs</code>, <code>has_large_files</code>, <code>large_files_size</code>, <code>large_files</code>) were added to provide details regarding the large files found during the import. You can read more about the attributes <a href="/v3/migration/source_imports/#git-lfs-related-fields">here</a>.</p>
+
+<p>As before, to access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.barred-rock-preview
+</code></pre>
+
+<p>For more information, see the <a href="/v3/migration/source_imports/">Source Import API documentation</a>, and if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Source+Import+API">let us know</a>.</p>
+</div>
+
+<div class="change" id="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">
+  <h2 class="title">
+<a id="--preview-support-for-oauth-authorizations-grants-api" class="anchor" href="#--preview-support-for-oauth-authorizations-grants-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 21, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/ptoomey3.png" alt="Avatar for ptoomey3" data-proofer-ignore>
+      <a href="https://github.com/ptoomey3" data-proofer-ignore>ptoomey3</a>
+  </li>
+</ul>
+</div>
+
+  <p>GitHub recently made changes to <a href="https://github.com/settings/applications#authorized">the application authorizations settings screen within GitHub</a> to display one entry for each OAuth application a user has authorized. Previously this screen showed one entry for each OAuth token that was generated by an OAuth application. For example, if you installed two instances of GitHub Desktop, you would see one entry for each installation. To simplify OAuth application management, we now show a single entry for each OAuth application. For OAuth applications that use the <a href="/v3/oauth/#web-application-flow">web flow</a> this was not a problem, since the web flow never generates more than one token for a given OAuth application and user. However, going forward, GitHub would like to allow all OAuth applications, including those that use the web flow, to generate more than one token.</p>
+
+<p>In preparation for that change, we are adding API support to simplify management of OAuth applications that matches what is available on GitHub.com. You can enable these changes during the preview period by providing a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.damage-preview
+</code></pre>
+
+<p>For example:</p>
+
+<pre class="command-line">
+curl -u username "https://api.github.com/applications/grants" \
+  -H "Accept: application/vnd.github.damage-preview"
+</pre>
+
+<p>You can learn more about the new APIs in the <a href="/v3/oauth_authorizations">OAuth authorizations</a> documentation.</p>
+
+<p>During the preview period, we may change aspects of these APIs based on developer feedback. We will announce the changes here on the developer blog, but we will not provide advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=OAuth+Authorizations+Grants+API+Preview">let us know</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2016-04-18-new-webhook-actions-are-live/">
+  <h2 class="title">
+<a id="--new-webhook-event-actions-are-now-live" class="anchor" href="#--new-webhook-event-actions-are-now-live" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 18, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/davidcelis.png" alt="Avatar for davidcelis" data-proofer-ignore>
+      <a href="https://github.com/davidcelis" data-proofer-ignore>davidcelis</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>As <a href="https://developer.github.com/changes/2016-03-15-new-webhook-actions/">promised last month</a>, we've expanded several webhook events with new functionality. Webhook events involving repositories, issues, and comments have all been updated to include new actions.</p>
+
+<p>Repository events will now fire when a repository is deleted, made public, or made private. In addition, while repository creation events will still only fire for organizations, the new repository event actions can be delivered for user-owned repositories.</p>
+
+<p>Events for issues, pull requests, and comments have also been updated and will now fire when these objects are edited or deleted. When an issue, pull request, or a comment has been edited, the event's payload will include a "changes" object. For example, if you've updated the title and body of an issue, the webhook payload informs you of what the issue used to look like:</p>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"edited"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"changes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the old title."</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the old body."</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"issue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the new title."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the new body."</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>The new values will be present in the <code>issue</code> object itself, as detailed above. Unchanged values will not be present within the <code>changes</code> object. Comment edits follow a similar pattern, though because they have no titles, the only change included in the payload would be the comment's body.</p>
+
+<h2>
+<a id="list-of-comprehensive-changes" class="anchor" href="#list-of-comprehensive-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="list-of-comprehensive-changes" class="anchor" href="#list-of-comprehensive-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>List of comprehensive changes</h2>
+
+<p>New actions were added to five events, all of which are detailed below.</p>
+
+<h3>
+<a id="repositoryevent" class="anchor" href="#repositoryevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="repositoryevent" class="anchor" href="#repositoryevent" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://developer.github.com/v3/activity/events/types/#repositoryevent">RepositoryEvent</a>
+</h3>
+
+<ul>
+<li>
+<code>deleted</code>: sent when a user-owned or organization-owned repository is deleted.</li>
+<li>
+<code>publicized</code>: sent when a user-owned or organization-owned repository is switched from private to public.</li>
+<li>
+<code>privatized</code>: sent when a user-owned or organization-owned repository is switched from public to private.</li>
+</ul>
+
+<h3>
+<a id="issuesevent" class="anchor" href="#issuesevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="issuesevent" class="anchor" href="#issuesevent" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://developer.github.com/v3/activity/events/types/#issuesevent">IssuesEvent</a>
+</h3>
+
+<ul>
+<li>
+<code>edited</code>: sent when the title and/or body of an issue is edited.</li>
+</ul>
+
+<h3>
+<a id="issuecommentevent" class="anchor" href="#issuecommentevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="issuecommentevent" class="anchor" href="#issuecommentevent" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://developer.github.com/v3/activity/events/types/#issuecommentevent">IssueCommentEvent</a>
+</h3>
+
+<ul>
+<li>
+<code>edited</code>: sent when a comment on an issue or pull request is edited</li>
+<li>
+<code>deleted</code>: sent when a comment on an issue or pull request is deleted</li>
+</ul>
+
+<h3>
+<a id="pullrequestevent" class="anchor" href="#pullrequestevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="pullrequestevent" class="anchor" href="#pullrequestevent" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://developer.github.com/v3/activity/events/types/#pullrequestevent">PullRequestEvent</a>
+</h3>
+
+<ul>
+<li>
+<code>edited</code>: sent when the title and/or body of a pull request is edited.</li>
+</ul>
+
+<h3>
+<a id="pullrequestreviewcommentevent" class="anchor" href="#pullrequestreviewcommentevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="pullrequestreviewcommentevent" class="anchor" href="#pullrequestreviewcommentevent" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://developer.github.com/v3/activity/events/types/#pullrequestreviewcommentevent">PullRequestReviewCommentEvent</a>
+</h3>
+
+<ul>
+<li>
+<code>edited</code>: sent when a comment on a pull request's unified diff (in the Files Changed tab) is edited</li>
+<li>
+<code>deleted</code>: sent when a comment on a pull request's unified diff (in the Files Changed tab) is deleted</li>
+</ul>
+
+<p>Take a look at <a href="https://developer.github.com/webhooks/">the documentation</a> for full details. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Webhook+Actions">get in touch</a>.</p>
+</div>
+
+<div class="change" id="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">
+  <h2 class="title">
+<a id="--commit-reference-sha-1-api-is-now-official" class="anchor" href="#--commit-reference-sha-1-api-is-now-official" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 12, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/mikemcquaid.png" alt="Avatar for mikemcquaid" data-proofer-ignore>
+      <a href="https://github.com/mikemcquaid" data-proofer-ignore>mikemcquaid</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We're making the <a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 API</a> part of the official GitHub API.</p>
+
+<p>During the preview period you needed to provide the <code>application/vnd.github.chitauri-preview+sha</code> preview media type in the <code>Accept</code> header to opt-in to the changes. Now that the preview period has ended the custom <a href="/v3/media/">media type</a> has changed to <code>application/vnd.github.v3.sha</code> (but the preview type will continue to work).</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Commit+Reference+SHA-1+API">get in touch with us</a>!</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">
+  <h2 class="title">
+<a id="--deployment-and-deploymentstatus-api-enhancements-preview-period" class="anchor" href="#--deployment-and-deploymentstatus-api-enhancements-preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 6, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/tarebyte.png" alt="Avatar for tarebyte" data-proofer-ignore>
+      <a href="https://github.com/tarebyte" data-proofer-ignore>tarebyte</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We've expanded our Deployments APIs to accommodate more powerful deployment practices and to lay the foundation for a more seamless integration of deployments within GitHub.</p>
+
+<h2>
+<a id="link-to-a-live-deployment" class="anchor" href="#link-to-a-live-deployment" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="link-to-a-live-deployment" class="anchor" href="#link-to-a-live-deployment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Link to a live deployment</h2>
+
+<p>To enable easy access to a live version of a deployment, we've added an <code>environment_url</code> field to the Deployments API. This environment will be exposed as a link in the Pull Request timeline to enable users to directly access a running version of their code without leaving the context of their work.</p>
+
+<p><em>Note: To add some clarity, we've renamed the <code>target_url</code> field to <code>log_url</code>. We will continue accept <code>target_url</code> to support legacy uses, but we recommend modifying this to the new name to avoid confusion. Future API versions might not support <code>target_url</code></em>.</p>
+
+<h2>
+<a id="inactive-deployment-status" class="anchor" href="#inactive-deployment-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="inactive-deployment-status" class="anchor" href="#inactive-deployment-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Inactive deployment status</h2>
+
+<p>We recognize that deployments in many common practices don't last forever. So, we've added a new <code>inactive</code> state to Deployment Statuses. You can use this state to communicate that a deployment is no longer active (e.g. something different has been deployed to the environment or the environment has been destroyed).</p>
+
+<h2>
+<a id="more-information-about-environments" class="anchor" href="#more-information-about-environments" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="more-information-about-environments" class="anchor" href="#more-information-about-environments" aria-hidden="true"><span class="octicon octicon-link"></span></a>More information about environments</h2>
+
+<p>We've expanded our Deployments API to provide additional information about the environments associated with deployments.</p>
+
+<p>We've added a new <code>transient_environment</code> field to allow you to communicate that an environment is specific to a deployment and will no longer exist at some point in the future (e.g. a temporary testing environment like a <a href="https://devcenter.heroku.com/articles/github-integration-review-apps">Heroku Review App</a>). By pairing this with other additions, we can determine that an <code>inactive</code> deployment associated with a <code>transient_environment</code> has an <code>environment_url</code> that is no longer accessible.</p>
+
+<p>Similarly, we've added a new <code>production_environment</code> field to allow you to communicate that an environment is one with which end users directly interact. We automatically set <code>production_environment</code> to <code>true</code> if the value for <code>environment</code> is <code>"production"</code>.</p>
+
+<h2>
+<a id="automatic-creation-of-inactive-statuses" class="anchor" href="#automatic-creation-of-inactive-statuses" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="automatic-creation-of-inactive-statuses" class="anchor" href="#automatic-creation-of-inactive-statuses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Automatic creation of inactive statuses</h2>
+
+<p>Each time we receive a new successful deployment status, we automatically add a new <code>inactive</code> status to all previous deployments made within the relevant repository to the same environment (based on the value of <code>environment</code>) given the environment is both non-transient and non-production. You can opt out of this behavior by passing <code>false</code> with the new <code>auto_inactive</code> parameter.</p>
+
+<p>For example, if <code>feature-branch</code> within <code>https://github.com/user/repository</code> is deployed to an environment named <code>staging</code> (which is a non-transient, non-production environment) and <code>bugfix-branch</code> within <code>https://github.com/user/repository</code> is later deployed to an environment named <code>staging</code>, we would automatically create a new <code>inactive</code> status for the deployment associated with <code>feature-branch</code>.</p>
+
+<h4>
+<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
+
+<p>Starting today, these API enhancements are available for developers to preview. At the end of the preview period, these enhancements will become official components of the GitHub API.</p>
+
+<p>To access the API during the preview period, you must provide a custom <a href="/v3/media/">media type</a> in the Accept header:</p>
+
+<pre><code>application/vnd.github.ant-man-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of these enhancements. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
+
+<p>Take a look at <a href="https://developer.github.com/v3/repos/deployments/">the documentation</a> for full details. We would love to hear your thoughts on these enhancements. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployment+and+DeploymentStatus+API+enhancements+preview+period">get in touch with us</a>!</p>
+
+<p></p>
+</div>
+
+<div class="paginate-container">
+  
+
+<div class="pagination">
+  
+  <span class="disabled">Previous</span>
+  
+
+  
+    
+    
+    
+    
+
+    
+      <a href="/changes/1" class="current">1</a>
+    
+
+    
+  
+    
+    
+    
+    
+
+    
+      <a href="/changes/2" class="">2</a>
+    
+
+    
+  
+    
+    
+    
+    
+
+    
+      <a href="/changes/3" class="">3</a>
+    
+
+    
+  
+    
+    
+    
+    
+      
+      
+      
+    
+
+    
+      <span class="disabled">…</span>
+    
+
+    
+  
+    
+    
+    
+    
+
+    
+      <a href="/changes/13" class="">13</a>
+    
+
+    
+  
+    
+    
+    
+    
+
+    
+      <a href="/changes/14" class="">14</a>
+    
+
+    
+  
+
+  
+    <a href="/changes/2" class="next_page">Next</a>
+  
+</div>
+
+<p></p>
+</div>
+    </div>
+
+    <div class="sidebar-shell">
+        <h2>Recent Posts</h2>
+<ul class="headlines sidebar-module">
+
+  <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
+
+  <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
+
+  <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
+
+  <li><a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API<br /><span class="date">May 23, 2016</span></a></li>
+
+  <li><a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API<br /><span class="date">May 12, 2016</span></a></li>
+
+  <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
+
+  <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
+
+  <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
+
+</ul>
+
+
+        <div class="sidebar-module notice"><a class="rss-subscribe" href="/changes.atom">Subscribe to the RSS feed</a></div>
+    </div>
+  </div>
+
+    <div id="footer" >
+    <div class="lower_footer">
+      <ul class="footer-cell">
+        <li><a href="https://github.com/github/developer.github.com#licenses">&copy; 2016 GitHub, Inc.</a></li>
+        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="https://help.github.com/security/">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+      </ul>
+
+      <span class="footer-cell">
+        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
+      </span>
+
+      <ul class="footer-cell">
+        <li><a href="https://status.github.com/">Status</a></li>
+        <li><a href="http://training.github.com/">Training</a></li>
+        <li><a href="http://shop.github.com/">Shop</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+        <li><a href="https://github.com/about">About</a></li>
+      </ul>
+    </div>
+
+  </div><!-- /#footer -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-3769691-37', 'github.com');
+    ga('send', 'pageview');
+  </script>
+
+</body>
+</html>
