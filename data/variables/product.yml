@@ -1,15 +1,15 @@
 api_url_pre:
   {% if page.version == 'dotcom' %}
-    'https://api.github.com'
+    'https://api.energyefficiency.me'
   {% else %}
-    'http(s)://<em>[hostname]</em>/api/v3'
+    'http(s)://<em>[hostname]</em>/v1/home'
   {% endif %}
 
 api_url_code:
   {% if page.version == 'dotcom' %}
-    'https://api.github.com'
+    'https://api.energyefficiency.me'
   {% else %}
-    'http(s)://[hostname]/api/v3'
+    'http(s)://[hostname]/v1/home'
   {% endif %}
 
 product_name:
