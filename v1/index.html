@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>New attributes for PullRequestReviewComment events | GitHub Developer Guide</title>
+  <title>EEme API v1 | GitHub Developer Guide</title>
   
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   
@@ -18,7 +18,7 @@
 </head>
 
 
-<body class="blog">
+<body>
   
 
 <div id="header-wrapper">
@@ -46,59 +46,64 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-06-09-new-attributes-for-pull-request-review-comment-events/">
-<h2 class="title">
-  <a href="/changes/2014-06-09-new-attributes-for-pull-request-review-comment-events/">New attributes for PullRequestReviewComment events</a>
-</h2>
+      <h1>
+<a id="eeme-disaggrgation-api" class="anchor" href="#eeme-disaggrgation-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>EEme Disaggrgation API</h1>
 
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    June 9, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jdpace.png" alt="Avatar for jdpace" data-proofer-ignore/>
-      <a href="https://github.com/jdpace" data-proofer-ignore>jdpace</a>
-  </li>
-</ul>
-</div>
-
-
-<p>We've enhanced the <a href="https://developer.github.com/v3/activity/events/types/#pullrequestreviewcommentevent">PullRequestReviewComment events payloads</a> to include <code>action</code> and <code>pull_request</code> attributes. With the addition of the <code>pull_request</code> attribute, you now have immediate access to detailed information about the pull request without needing an additional API request.</p>
-
-<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=PullRequestReviewComment+Event+Payloads">get in touch</a>.</p>
-</div>
-
-    </div>
-
-    <div class="sidebar-shell">
-        <h2>Recent Posts</h2>
-<ul class="headlines sidebar-module">
-
-  <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
-
-  <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
-
-  <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
-
-  <li><a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API<br /><span class="date">May 23, 2016</span></a></li>
-
-  <li><a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API<br /><span class="date">May 12, 2016</span></a></li>
-
-  <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
-
+<ul id="markdown-toc">
+<li><a href="#current-version" id="markdown-toc-current-version">Current Version</a></li>
+<li><a href="#authentication" id="markdown-toc-authentication">Authentication</a></li>
+<li><a href="#error-handling" id="markdown-toc-error-handling">Error Handling</a></li>
 </ul>
 
+<h2>
+<a id="current-version" class="anchor" href="#current-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Version</h2>
 
-        <div class="sidebar-module notice"><a class="rss-subscribe" href="/changes.atom">Subscribe to the RSS feed</a></div>
+<p>Currently we only provide <strong>v1</strong>.</p>
+
+<h2>
+<a id="authentication" class="anchor" href="#authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authentication</h2>
+
+<h3>
+<a id="api-key-sent-in-a-header" class="anchor" href="#api-key-sent-in-a-header" aria-hidden="true"><span class="octicon octicon-link"></span></a>API Key (sent in a header)</h3>
+
+<pre class="command-line">
+<span class="command">curl -H "Authorization: Bearer <your api key>" https://api.github.com</your></span>
+</pre>
+
+<h2>
+<a id="error-handling" class="anchor" href="#error-handling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Error Handling</h2>
+
+<p>If an error occurred, in addition to the status code provided in the header portion of the HTTP response, the HTTP response body contains an error object which provides more details on the specific cause of the error and how to resolve it.</p>
+
+<pre><code>{
+    "error": {
+        "code": ERROR_CODE,
+        "message": "Something bad happened",
+        "description": "Here are more details about what happened"
+    }
+}
+</code></pre>
     </div>
-  </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+  <div class="js-toggle-list sidebar-module expandable">
+    <ul>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/">Overview</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/media/">Media Types</a></li>
+          <li><a href="/v3/oauth/">OAuth</a></li>
+          <li><a href="/v3/oauth_authorizations/">OAuth Authorizations API</a></li>
+          <li><a href="/v3/auth/">Other Authentication Methods</a></li>
+          <li><a href="/v3/troubleshooting/">Troubleshooting</a></li>
+          <li><a href="/v3/versions/">Versions</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div> <!-- /sidebar-module -->
+</div><!-- /sidebar-shell -->
+
+  </div><!-- #wrapper -->
 
     <div id="footer" >
     <div class="lower_footer">
