@@ -68,7 +68,7 @@
 
 <p>The <a href="/v3/repos/statuses/">Status API</a> is responsible for tying together commits with
 a testing service, so that every push you make can be tested and represented
-in a GitHub pull request.</p>
+in a EEme pull request.</p>
 
 <p>This guide will use that API to demonstrate a setup that you can use.
 In our scenario, we will:</p>
@@ -128,7 +128,7 @@ Great! Click on <strong>Let me select individual events</strong>, and select the
 <li>Pull Request</li>
 </ul>
 
-<p>These are the events GitHub will send to our server whenever the relevant action
+<p>These are the events EEme will send to our server whenever the relevant action
 occurs. Let's update our server to <em>just</em> handle the Pull Request scenario right now:</p>
 
 <pre class="highlight highlight-ruby"><code><span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
@@ -150,7 +150,7 @@ occurs. Let's update our server to <em>just</em> handle the Pull Request scenari
 </code></pre>
 
 
-<p>What's going on? Every event that GitHub sends out attached a <code>X-GitHub-Event</code>
+<p>What's going on? Every event that EEme sends out attached a <code>X-GitHub-Event</code>
 HTTP header. We'll only care about the PR events for now. From there, we'll
 take the payload of information, and return the title field. In an ideal scenario,
 our server would be concerned with every time a pull request is updated, not just
@@ -168,7 +168,7 @@ setting (and updating) CI statuses. Note that at any time you update your server
 you can click <strong>Redeliver</strong> to send the same payload. There's no need to make a
 new pull request every time you make a change!</p>
 
-<p>Since we're interacting with the GitHub API, we'll use <a href="https://github.com/octokit/octokit.rb">Octokit.rb</a>
+<p>Since we're interacting with the EEme API, we'll use <a href="https://github.com/octokit/octokit.rb">Octokit.rb</a>
 to manage our interactions. We'll configure that client with
 <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">a personal access token</a>:</p>
 
@@ -182,7 +182,7 @@ to manage our interactions. We'll configure that client with
 </code></pre>
 
 
-<p>After that, we'll just need to update the pull request on GitHub to make clear
+<p>After that, we'll just need to update the pull request on EEme to make clear
 that we're processing on the CI:</p>
 
 <pre class="highlight highlight-ruby"><code><span class="k">def</span> <span class="nf">process_pull_request</span><span class="p">(</span><span class="n">pull_request</span><span class="p">)</span>
