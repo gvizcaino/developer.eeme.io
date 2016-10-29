@@ -26,18 +26,6 @@
     <div>
       <a class="logo" href="/">EEme:Developer</a>
       <ul class="nav">
-        
-        <li><a href="/v1/" class="nav-api">API</a></li>
-        <li><a href="/program/" class="nav-developers">Developers</a></li>
-        <li><a href="/changes/" class="nav-blog">Blog</a></li>
-        <li><a href="https://github.com/contact">Support</a></li>
-        <li id="search-container">
-          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" /><label class="search-placeholder">Search</label>
-          <div class="cancel-search"></div>
-          <ul id="search-results">
-
-          </ul>
-        </li>
       </ul>
     </div>
   </div><!-- #header -->
@@ -86,7 +74,7 @@ into your repository.</p>
 
 <p>You can fill out every piece of information however you like, except the
 <strong>Authorization callback URL</strong>. This is easily the most important piece to setting
-up your application. It's the callback URL that EEme returns the user to after
+up your application. It's the callback URL that GitHub returns the user to after
 successful authentication.</p>
 
 <p>Since we're running a regular Sinatra server, the location of the local instance
@@ -112,7 +100,7 @@ is set to <code>http://localhost:4567</code>. Let's fill in the callback URL as 
 
 <p>Your client ID and client secret keys come from <a href="https://github.com/settings/developers">your application's configuration
 page</a>. You should <strong>never, <em>ever</em></strong> store these values in
-EEme--or any other public place, for that matter. We recommend storing them as
+GitHub--or any other public place, for that matter. We recommend storing them as
 <a href="http://en.wikipedia.org/wiki/Environment_variable#Getting_and_setting_environment_variables">environment variables</a>--which is exactly what we've done here.</p>
 
 <p>Next, in <em>views/index.erb</em>, paste this content:</p>
@@ -143,14 +131,14 @@ EEme--or any other public place, for that matter. We recommend storing them as
 requesting <code>user:email</code> scope for reading private email addresses.</p>
 
 <p>Navigate your browser to <code>http://localhost:4567</code>. After clicking on the link, you
-should be taken to EEme, and presented with a dialog that looks something like this:
+should be taken to GitHub, and presented with a dialog that looks something like this:
 <img src="/assets/images/oauth_prompt.png" alt="GitHub's OAuth Prompt"></p>
 
 <p>If you trust yourself, click <strong>Authorize App</strong>. Wuh-oh! Sinatra spits out a
 <code>404</code> error. What gives?!</p>
 
 <p>Well, remember when we specified a Callback URL to be <code>callback</code>? We didn't provide
-a route for it, so EEme doesn't know where to drop the user after they authorize
+a route for it, so GitHub doesn't know where to drop the user after they authorize
 the app. Let's fix that now!</p>
 
 <h3>
@@ -175,8 +163,8 @@ the app. Let's fix that now!</p>
 </code></pre>
 
 
-<p>After a successful app authentication, EEme provides a temporary <code>code</code> value.
-You'll need to <code>POST</code> this code back to EEme in exchange for an <code>access_token</code>.
+<p>After a successful app authentication, GitHub provides a temporary <code>code</code> value.
+You'll need to <code>POST</code> this code back to GitHub in exchange for an <code>access_token</code>.
 To simplify our GET and POST HTTP requests, we're using the <a href="https://github.com/archiloque/rest-client">rest-client</a>.
 Note that you'll probably never access the API through REST. For a more serious
 application, you should probably use <a href="/libraries/">a library written in the language of your choice</a>.</p>
@@ -277,7 +265,7 @@ time they needed to access the web page. For example, try navigating directly to
 
 <p>What if we could circumvent the entire
 "click here" process, and just <em>remember</em> that, as long as the user's logged into
-EEme, they should be able to access this application? Hold on to your hat,
+GitHub, they should be able to access this application? Hold on to your hat,
 because <em>that's exactly what we're going to do</em>.</p>
 
 <p>Our little server above is rather simple. In order to wedge in some intelligent
@@ -372,7 +360,7 @@ the <code>user:email</code> scope.</p>
 
 
 <p>Much of the code should look familiar. For example, we're still using <code>RestClient.get</code>
-to call out to the EEme API, and we're still passing our results to be rendered
+to call out to the GitHub API, and we're still passing our results to be rendered
 in an ERB template (this time, it's called <code>advanced.erb</code>).</p>
 
 <p>Also, we now have the <code>authenticated?</code> method which checks if the user is already
@@ -411,10 +399,10 @@ which redirects you to <code>/callback</code>. <code>/callback</code> then sends
 and since we've been authenticated, renders <em>advanced.erb</em>.</p>
 
 <p>We could completely simplify this roundtrip routing by simply changing our callback
-URL in EEme to <code>/</code>. But, since both <em>server.rb</em> and <em>advanced.rb</em> are relying on
+URL in GitHub to <code>/</code>. But, since both <em>server.rb</em> and <em>advanced.rb</em> are relying on
 the same callback URL, we've got to do a little bit of wonkiness to make it work.</p>
 
-<p>Also, if we had never authorized this application to access our EEme data,
+<p>Also, if we had never authorized this application to access our GitHub data,
 we would've seen the same confirmation dialog from earlier pop-up and warn us.</p>
 
 <p>If you'd like, you can play around with <a href="https://github.com/atmos/sinatra-auth-github-test">yet another Sinatra-GitHub auth example</a>
@@ -450,36 +438,10 @@ available as a separate project.</p>
     <div id="footer" >
     <div class="lower_footer">
       <ul class="footer-cell">
-        <li><a href="https://github.com/github/developer.github.com#licenses">&copy; 2016 GitHub, Inc.</a></li>
-        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
-        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
-        <li><a href="https://help.github.com/security/">Security</a></li>
-        <li><a href="https://github.com/contact">Contact</a></li>
-      </ul>
-
-      <span class="footer-cell">
-        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
-      </span>
-
-      <ul class="footer-cell">
-        <li><a href="https://status.github.com/">Status</a></li>
-        <li><a href="http://training.github.com/">Training</a></li>
-        <li><a href="http://shop.github.com/">Shop</a></li>
-        <li><a href="https://github.com/blog">Blog</a></li>
-        <li><a href="https://github.com/about">About</a></li>
       </ul>
     </div>
 
   </div><!-- /#footer -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-3769691-37', 'github.com');
-    ga('send', 'pageview');
-  </script>
 
 </body>
 </html>

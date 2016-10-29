@@ -26,18 +26,6 @@
     <div>
       <a class="logo" href="/">EEme:Developer</a>
       <ul class="nav">
-        
-        <li><a href="/v1/" class="nav-api">API</a></li>
-        <li><a href="/program/" class="nav-developers">Developers</a></li>
-        <li><a href="/changes/" class="nav-blog">Blog</a></li>
-        <li><a href="https://github.com/contact">Support</a></li>
-        <li id="search-container">
-          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" /><label class="search-placeholder">Search</label>
-          <div class="cancel-search"></div>
-          <ul id="search-results">
-
-          </ul>
-        </li>
       </ul>
     </div>
   </div><!-- #header -->
@@ -142,7 +130,7 @@
 <h2>
 <a id="deploy-keys" class="anchor" href="#deploy-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deploy keys</h2>
 
-<p>A deploy key is an SSH key that is stored on your server and grants access to a single EEme repository.  This key is attached directly to the repository instead of to a personal user account.</p>
+<p>A deploy key is an SSH key that is stored on your server and grants access to a single GitHub repository.  This key is attached directly to the repository instead of to a personal user account.</p>
 
 <h4>
 <a id="pros-2" class="anchor" href="#pros-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pros</h4>
@@ -167,7 +155,7 @@
 <ol>
 <li>
 <a href="https://help.github.com/articles/generating-ssh-keys">Run the <code>ssh-keygen</code> procedure</a> on your server.</li>
-<li>In the top right corner of any EEme page, click your profile photo.
+<li>In the top right corner of any GitHub page, click your profile photo.
 <img src="https://github-images.s3.amazonaws.com/help/profile/top_right_avatar.png" alt="Sample of an avatar">
 </li>
 <li>On your profile page, click the <strong>Repositories</strong> tab, then click the name of your repository.
@@ -187,7 +175,7 @@
 <h2>
 <a id="machine-users" class="anchor" href="#machine-users" aria-hidden="true"><span class="octicon octicon-link"></span></a>Machine users</h2>
 
-<p>If your server needs to access multiple repositories, you can choose to create a new EEme account and attach an SSH key that will be used exclusively for automation.  Since this EEme account won't be used by a human, it's called a machine user.  You can then <a href="https://help.github.com/articles/how-do-i-add-a-collaborator">add the machine user as collaborator</a> or <a href="https://help.github.com/articles/adding-organization-members-to-a-team">add the machine user to a team</a> with access to the repositories it needs to manipulate.  <strong>NOTE</strong>: Adding a machine user as a collaborator always grants read/write access.  Adding a machine user to a team grants the permissions of the team.</p>
+<p>If your server needs to access multiple repositories, you can choose to create a new GitHub account and attach an SSH key that will be used exclusively for automation.  Since this GitHub account won't be used by a human, it's called a machine user.  You can then <a href="https://help.github.com/articles/how-do-i-add-a-collaborator">add the machine user as collaborator</a> or <a href="https://help.github.com/articles/adding-organization-members-to-a-team">add the machine user to a team</a> with access to the repositories it needs to manipulate.  <strong>NOTE</strong>: Adding a machine user as a collaborator always grants read/write access.  Adding a machine user to a team grants the permissions of the team.</p>
 
 <div class="alert tip">
 
@@ -257,36 +245,10 @@
     <div id="footer" >
     <div class="lower_footer">
       <ul class="footer-cell">
-        <li><a href="https://github.com/github/developer.github.com#licenses">&copy; 2016 GitHub, Inc.</a></li>
-        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
-        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
-        <li><a href="https://help.github.com/security/">Security</a></li>
-        <li><a href="https://github.com/contact">Contact</a></li>
-      </ul>
-
-      <span class="footer-cell">
-        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
-      </span>
-
-      <ul class="footer-cell">
-        <li><a href="https://status.github.com/">Status</a></li>
-        <li><a href="http://training.github.com/">Training</a></li>
-        <li><a href="http://shop.github.com/">Shop</a></li>
-        <li><a href="https://github.com/blog">Blog</a></li>
-        <li><a href="https://github.com/about">About</a></li>
       </ul>
     </div>
 
   </div><!-- /#footer -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-3769691-37', 'github.com');
-    ga('send', 'pageview');
-  </script>
 
 </body>
 </html>

@@ -26,18 +26,6 @@
     <div>
       <a class="logo" href="/">EEme:Developer</a>
       <ul class="nav">
-        
-        <li><a href="/v1/" class="nav-api">API</a></li>
-        <li><a href="/program/" class="nav-developers">Developers</a></li>
-        <li><a href="/changes/" class="nav-blog">Blog</a></li>
-        <li><a href="https://github.com/contact">Support</a></li>
-        <li id="search-container">
-          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" /><label class="search-placeholder">Search</label>
-          <div class="cancel-search"></div>
-          <ul id="search-results">
-
-          </ul>
-        </li>
       </ul>
     </div>
   </div><!-- #header -->
@@ -53,7 +41,7 @@
       <h1>
 <a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h1>
 
-<p>This describes the resources that make up the official EEme API v3. If you have any problems or requests please contact
+<p>This describes the resources that make up the official GitHub API v3. If you have any problems or requests please contact
 <a href="https://github.com/contact?form%5Bsubject%5D=APIv3">support</a>.</p>
 
 <ul id="markdown-toc">
@@ -87,11 +75,11 @@ We encourage you to <a href="/v3/media/#request-specific-version">explicitly req
 <h2>
 <a id="schema" class="anchor" href="#schema" aria-hidden="true"><span class="octicon octicon-link"></span></a>Schema</h2>
 
-<p>All API access is over HTTPS, and accessed from the <code>https://api.github.com</code>.  All data is
+<p>All API access is over HTTPS, and accessed from the <code>https://api.energyefficiency.me</code>.  All data is
 sent and received as JSON.</p>
 
 <pre class="command-line">
-<span class="command">curl -i https://api.energyefficiency.m1/users/octocat/orgs</span>
+<span class="command">curl -i https://api.energyefficiency.me/users/octocat/orgs</span>
 
 <span class="output">HTTP/1.1 200 OK</span>
 <span class="output">Server: nginx</span>
@@ -158,7 +146,7 @@ specified as a segment in the path can be passed as an HTTP query string
 parameter:</p>
 
 <pre class="command-line">
-<span class="command">curl -i "https://api.energyefficiency.m1/repos/vmg/redcarpet/issues?state=closed"</span>
+<span class="command">curl -i "https://api.energyefficiency.me/repos/vmg/redcarpet/issues?state=closed"</span>
 </pre>
 
 <p>In this example, the 'vmg' and 'redcarpet' values are provided for the <code>:owner</code>
@@ -169,7 +157,7 @@ string.</p>
 with a Content-Type of 'application/json':</p>
 
 <pre class="command-line">
-<span class="command">curl -i -u username -d '{"scopes":["public_repo"]}' https://api.energyefficiency.m1/authorizations</span>
+<span class="command">curl -i -u username -d '{"scopes":["public_repo"]}' https://api.energyefficiency.me/authorizations</span>
 </pre>
 
 <h2>
@@ -178,7 +166,7 @@ with a Content-Type of 'application/json':</p>
 <p>You can issue a <code>GET</code> request to the root endpoint to get all the endpoint categories that the API supports:</p>
 
 <pre class="command-line">
-<span class="command">curl https://api.energyefficiency.m1</span>
+<span class="command">curl https://api.energyefficiency.me</span>
 </pre>
 
 <h2>
@@ -338,7 +326,7 @@ action.</p>
 <h2>
 <a id="authentication" class="anchor" href="#authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authentication</h2>
 
-<p>There are three ways to authenticate through EEme API v3.  Requests that
+<p>There are three ways to authenticate through GitHub API v3.  Requests that
 require authentication will return <code>404 Not Found</code>, instead of
 <code>403 Forbidden</code>, in some places.  This is to prevent the accidental leakage
 of private repositories to unauthorized users.</p>
@@ -347,21 +335,21 @@ of private repositories to unauthorized users.</p>
 <a id="basic-authentication" class="anchor" href="#basic-authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic Authentication</h3>
 
 <pre class="command-line">
-<span class="command">curl -u "username" https://api.energyefficiency.m1</span>
+<span class="command">curl -u "username" https://api.energyefficiency.me</span>
 </pre>
 
 <h3>
 <a id="oauth2-token-sent-in-a-header" class="anchor" href="#oauth2-token-sent-in-a-header" aria-hidden="true"><span class="octicon octicon-link"></span></a>OAuth2 Token (sent in a header)</h3>
 
 <pre class="command-line">
-<span class="command">curl -H "Authorization: token OAUTH-TOKEN" https://api.energyefficiency.m1</span>
+<span class="command">curl -H "Authorization: token OAUTH-TOKEN" https://api.energyefficiency.me</span>
 </pre>
 
 <h3>
 <a id="oauth2-token-sent-as-a-parameter" class="anchor" href="#oauth2-token-sent-as-a-parameter" aria-hidden="true"><span class="octicon octicon-link"></span></a>OAuth2 Token (sent as a parameter)</h3>
 
 <pre class="command-line">
-<span class="command">curl https://api.energyefficiency.m1/?access_token=OAUTH-TOKEN</span>
+<span class="command">curl https://api.energyefficiency.me/?access_token=OAUTH-TOKEN</span>
 </pre>
 
 <p>Read <a href="/v3/oauth/">more about OAuth2</a>.  Note that OAuth2 tokens can be <a href="/v3/oauth_authorizations/#create-a-new-authorization">acquired
@@ -372,7 +360,7 @@ are not websites.</p>
 <a id="oauth2-keysecret" class="anchor" href="#oauth2-keysecret" aria-hidden="true"><span class="octicon octicon-link"></span></a>OAuth2 Key/Secret</h3>
 
 <pre class="command-line">
-<span class="command">curl 'https://api.energyefficiency.m1/users/whatever?client_id=xxxx&amp;client_secret=yyyy'</span>
+<span class="command">curl 'https://api.energyefficiency.me/users/whatever?client_id=xxxx&amp;client_secret=yyyy'</span>
 </pre>
 
 <p>This should only be used in server to server scenarios.  Don't leak your
@@ -386,7 +374,7 @@ OAuth application's client secret to your users.</p>
 <p>Authenticating with invalid credentials will return <code>401 Unauthorized</code>:</p>
 
 <pre class="command-line">
-<span class="command">curl -i https://api.energyefficiency.m1 -u foo:bar</span>
+<span class="command">curl -i https://api.energyefficiency.me -u foo:bar</span>
 <span class="output">HTTP/1.1 401 Unauthorized</span>
 
 <span class="output">{</span>
@@ -400,7 +388,7 @@ the API will temporarily reject all authentication attempts for that user
 (including ones with valid credentials) with <code>403 Forbidden</code>:</p>
 
 <pre class="command-line">
-<span class="command">curl -i https://api.energyefficiency.m1 -u valid_username:valid_password</span>
+<span class="command">curl -i https://api.energyefficiency.me -u valid_username:valid_password</span>
 <span class="output">HTTP/1.1 403 Forbidden</span>
 
 <span class="output">{</span>
@@ -442,7 +430,7 @@ Note that for technical reasons not all endpoints respect the <code>?per_page</c
 see <a href="https://developer.github.com/v3/activity/events/">events</a> for example.</p>
 
 <pre class="command-line">
-<span class="command">curl 'https://api.energyefficiency.m1/user/repos?page=2&amp;per_page=100'</span>
+<span class="command">curl 'https://api.energyefficiency.me/user/repos?page=2&amp;per_page=100'</span>
 </pre>
 
 <p>Note that page numbering is 1-based and that omitting the <code>?page</code>
@@ -510,7 +498,7 @@ rules</a>.</p>
 rate limit status:</p>
 
 <pre class="command-line">
-<span class="command">curl -i https://api.energyefficiency.m1/users/whatever</span>
+<span class="command">curl -i https://api.energyefficiency.me/users/whatever</span>
 <span class="output">HTTP/1.1 200 OK</span>
 <span class="output">Date: Mon, 01 Jul 2013 17:27:06 GMT</span>
 <span class="output">Status: 200 OK</span>
@@ -577,7 +565,7 @@ API hit.
 <p>If your OAuth application needs to make unauthenticated calls with a higher rate limit, you can pass your app's client ID and secret as part of the query string.</p>
 
 <pre class="command-line">
-<span class="command">curl -i 'https://api.energyefficiency.m1/users/whatever?client_id=xxxx&amp;client_secret=yyyy'</span>
+<span class="command">curl -i 'https://api.energyefficiency.me/users/whatever?client_id=xxxx&amp;client_secret=yyyy'</span>
 <span class="output">HTTP/1.1 200 OK</span>
 <span class="output">Date: Mon, 01 Jul 2013 17:27:06 GMT</span>
 <span class="output">Status: 200 OK</span>
@@ -632,7 +620,7 @@ response:</p>
 <a id="user-agent-required" class="anchor" href="#user-agent-required" aria-hidden="true"><span class="octicon octicon-link"></span></a>User Agent Required</h2>
 
 <p>All API requests MUST include a valid <code>User-Agent</code> header. Requests with no <code>User-Agent</code>
-header will be rejected. We request that you use your EEme username, or the name of your
+header will be rejected. We request that you use your GitHub username, or the name of your
 application, for the <code>User-Agent</code> header value. This allows us to contact you if there are problems.</p>
 
 <p>Here's an example:</p>
@@ -644,7 +632,7 @@ User-Agent: Awesome-Octocat-App
 <p>If you provide an invalid <code>User-Agent</code> header, you will receive a <code>403 Forbidden</code> response:</p>
 
 <pre class="command-line">
-<span class="command">curl -iH 'User-Agent: ' https://api.energyefficiency.m1/meta</span>
+<span class="command">curl -iH 'User-Agent: ' https://api.energyefficiency.me/meta</span>
 <span class="output">HTTP/1.0 403 Forbidden</span>
 <span class="output">Connection: close</span>
 <span class="output">Content-Type: text/html</span>
@@ -671,7 +659,7 @@ whenever possible.</p>
 </div>
 
 <pre class="command-line">
-<span class="command">curl -i https://api.energyefficiency.m1/user</span>
+<span class="command">curl -i https://api.energyefficiency.me/user</span>
 <span class="output">HTTP/1.1 200 OK</span>
 <span class="output">Cache-Control: private, max-age=60</span>
 <span class="output">ETag: "644b5b0155e6404a9cc4bd9d8b1ae730"</span>
@@ -682,7 +670,7 @@ whenever possible.</p>
 <span class="output">X-RateLimit-Remaining: 4996</span>
 <span class="output">X-RateLimit-Reset: 1372700873</span>
 
-<span class="command">curl -i https://api.energyefficiency.m1/user -H 'If-None-Match: "644b5b0155e6404a9cc4bd9d8b1ae730"'</span>
+<span class="command">curl -i https://api.energyefficiency.me/user -H 'If-None-Match: "644b5b0155e6404a9cc4bd9d8b1ae730"'</span>
 <span class="output">HTTP/1.1 304 Not Modified</span>
 <span class="output">Cache-Control: private, max-age=60</span>
 <span class="output">ETag: "644b5b0155e6404a9cc4bd9d8b1ae730"</span>
@@ -693,7 +681,7 @@ whenever possible.</p>
 <span class="output">X-RateLimit-Remaining: 4996</span>
 <span class="output">X-RateLimit-Reset: 1372700873</span>
 
-<span class="command">curl -i https://api.energyefficiency.m1/user -H "If-Modified-Since: Thu, 05 Jul 2012 15:31:30 GMT"</span>
+<span class="command">curl -i https://api.energyefficiency.me/user -H "If-Modified-Since: Thu, 05 Jul 2012 15:31:30 GMT"</span>
 <span class="output">HTTP/1.1 304 Not Modified</span>
 <span class="output">Cache-Control: private, max-age=60</span>
 <span class="output">Last-Modified: Thu, 05 Jul 2012 15:31:30 GMT</span>
@@ -717,7 +705,7 @@ HTML 5 Security Guide.</p>
 <code>http://example.com</code>:</p>
 
 <pre class="command-line">
-<span class="command">curl -i https://api.energyefficiency.m1 -H "Origin: http://example.com"</span>
+<span class="command">curl -i https://api.energyefficiency.me -H "Origin: http://example.com"</span>
 HTTP/1.1 302 Found
 Access-Control-Allow-Origin: *
 Access-Control-Expose-Headers: ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
@@ -727,7 +715,7 @@ Access-Control-Allow-Credentials: true
 <p>This is what the CORS preflight request looks like:</p>
 
 <pre class="command-line">
-<span class="command">curl -i https://api.energyefficiency.m1 -H "Origin: http://example.com" -X OPTIONS</span>
+<span class="command">curl -i https://api.energyefficiency.me -H "Origin: http://example.com" -X OPTIONS</span>
 HTTP/1.1 204 No Content
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Headers: Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, X-GitHub-OTP, X-Requested-With
@@ -742,7 +730,7 @@ Access-Control-Allow-Credentials: true
 
 <p>You can send a <code>?callback</code> parameter to any GET call to have the results
 wrapped in a JSON function.  This is typically used when browsers want
-to embed EEme content in web pages by getting around cross domain
+to embed GitHub content in web pages by getting around cross domain
 issues.  The response includes the same data output as the regular API,
 plus the relevant HTTP Header information.</p>
 
@@ -845,7 +833,7 @@ how these timestamps can be specified.</p>
 to the <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">list of names from the Olson database</a>.</p>
 
 <pre class="command-line">
-<span class="command">curl -H "Time-Zone: Europe/Amsterdam" -X POST https://api.energyefficiency.m1/repos/github/linguist/contents/new_file.md</span>
+<span class="command">curl -H "Time-Zone: Europe/Amsterdam" -X POST https://api.energyefficiency.me/repos/github/linguist/contents/new_file.md</span>
 </pre>
 
 <p>This means that we generate a timestamp for the moment your API call is made in
@@ -859,7 +847,7 @@ that current timestamp.</p>
 
 <p>If no <code>Time-Zone</code> header is specified and you make an authenticated call to the
 API, we use the last known timezone for the authenticated user. The last known
-timezone is updated whenever you browse the EEme website.</p>
+timezone is updated whenever you browse the GitHub website.</p>
 
 <h4>
 <a id="utc" class="anchor" href="#utc" aria-hidden="true"><span class="octicon octicon-link"></span></a>UTC</h4>
@@ -868,59 +856,16 @@ timezone is updated whenever you browse the EEme website.</p>
 to create the git commit.</p>
     </div>
 
-    <div id="js-sidebar" class="sidebar-shell">
-  <div class="js-toggle-list sidebar-module expandable">
-    <ul>
-      <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/">Overview</a></h3>
-        <ul class="js-guides">
-          <li><a href="/v3/media/">Media Types</a></li>
-          <li><a href="/v3/oauth/">OAuth</a></li>
-          <li><a href="/v3/oauth_authorizations/">OAuth Authorizations API</a></li>
-          <li><a href="/v3/auth/">Other Authentication Methods</a></li>
-          <li><a href="/v3/troubleshooting/">Troubleshooting</a></li>
-          <li><a href="/v3/versions/">Versions</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div> <!-- /sidebar-module -->
-</div><!-- /sidebar-shell -->
-
+    
   </div><!-- #wrapper -->
 
     <div id="footer" >
     <div class="lower_footer">
       <ul class="footer-cell">
-        <li><a href="https://github.com/github/developer.github.com#licenses">&copy; 2016 GitHub, Inc.</a></li>
-        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
-        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
-        <li><a href="https://help.github.com/security/">Security</a></li>
-        <li><a href="https://github.com/contact">Contact</a></li>
-      </ul>
-
-      <span class="footer-cell">
-        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
-      </span>
-
-      <ul class="footer-cell">
-        <li><a href="https://status.github.com/">Status</a></li>
-        <li><a href="http://training.github.com/">Training</a></li>
-        <li><a href="http://shop.github.com/">Shop</a></li>
-        <li><a href="https://github.com/blog">Blog</a></li>
-        <li><a href="https://github.com/about">About</a></li>
       </ul>
     </div>
 
   </div><!-- /#footer -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-3769691-37', 'github.com');
-    ga('send', 'pageview');
-  </script>
 
 </body>
 </html>

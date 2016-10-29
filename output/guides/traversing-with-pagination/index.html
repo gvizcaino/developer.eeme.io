@@ -26,18 +26,6 @@
     <div>
       <a class="logo" href="/">EEme:Developer</a>
       <ul class="nav">
-        
-        <li><a href="/v1/" class="nav-api">API</a></li>
-        <li><a href="/program/" class="nav-developers">Developers</a></li>
-        <li><a href="/changes/" class="nav-blog">Blog</a></li>
-        <li><a href="https://github.com/contact">Support</a></li>
-        <li id="search-container">
-          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" /><label class="search-placeholder">Search</label>
-          <div class="cancel-search"></div>
-          <ul id="search-results">
-
-          </ul>
-        </li>
       </ul>
     </div>
   </div><!-- #header -->
@@ -66,11 +54,11 @@
 <li><a href="#constructing-pagination-links" id="markdown-toc-constructing-pagination-links">Constructing Pagination Links</a></li>
 </ul>
 
-<p>The EEme API provides a vast wealth of information for developers to consume.
+<p>The GitHub API provides a vast wealth of information for developers to consume.
 Most of the time, you might even find that you're asking for <em>too much</em> information,
 and in order to keep our servers happy, the API will automatically <a href="/v3/#pagination">paginate the requested items</a>.</p>
 
-<p>In this guide, we'll make some calls to the EEme Search API, and iterate over
+<p>In this guide, we'll make some calls to the GitHub Search API, and iterate over
 the results using pagination. You can find the complete source code for this project
 in the <a href="https://github.com/github/platform-samples/tree/master/api/ruby/traversing-with-pagination">platform-samples</a> repository.</p>
 
@@ -95,7 +83,7 @@ of an API call. For example, let's make a curl request to the search API, to fin
 out how many times Mozilla projects use the phrase <code>addClass</code>:</p>
 
 <pre class="command-line">
-<span class="command">curl -I "https://api.energyefficiency.m1/search/code?q=addClass+user:mozilla"</span>
+<span class="command">curl -I "https://api.energyefficiency.me/search/code?q=addClass+user:mozilla"</span>
 </pre>
 
 <p>The <code>-I</code> parameter indicates that we only care about the headers, not the actual
@@ -352,36 +340,10 @@ order to generate links for back (<code>&lt;&lt;</code>) and forward (<code>&gt;
     <div id="footer" >
     <div class="lower_footer">
       <ul class="footer-cell">
-        <li><a href="https://github.com/github/developer.github.com#licenses">&copy; 2016 GitHub, Inc.</a></li>
-        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
-        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
-        <li><a href="https://help.github.com/security/">Security</a></li>
-        <li><a href="https://github.com/contact">Contact</a></li>
-      </ul>
-
-      <span class="footer-cell">
-        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
-      </span>
-
-      <ul class="footer-cell">
-        <li><a href="https://status.github.com/">Status</a></li>
-        <li><a href="http://training.github.com/">Training</a></li>
-        <li><a href="http://shop.github.com/">Shop</a></li>
-        <li><a href="https://github.com/blog">Blog</a></li>
-        <li><a href="https://github.com/about">About</a></li>
       </ul>
     </div>
 
   </div><!-- /#footer -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-3769691-37', 'github.com');
-    ga('send', 'pageview');
-  </script>
 
 </body>
 </html>
