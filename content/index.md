@@ -165,7 +165,7 @@ $ curl -0 -X GET \
 Usage data is in CSV format. It includes the location, timestamp, and meter reading. The first line is used to indicate the location, followed by the meter readings. The minimun length of data is 6 months.
 
 ### CSV format
-location, <Zipcode/City/Address> <Country>
+location, Zipcode/City/Address Country  
 timstamp, meter reading (the unit depends on your analytics configuration)
 
 ### Example 

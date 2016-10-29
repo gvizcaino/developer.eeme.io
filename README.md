@@ -125,6 +125,8 @@ For more information, see [the reference documentation](https://github.com/gjtor
 
 ## Deploy
 
+git subtree push --prefix output origin gh-pages
+
 Deployments happen automatically once a PR is merged into `master`. A tool called [Publisher](https://github.com/gjtorikian/publisher) takes the `master` branch, builds it using Nanoc, and publishes the content to `gh-pages`. Thus, any commit to `master` is automatically sent over to `gh-pages`, where it's picked up and served by GitHub Pages.
 
 For developer.eeme.io, after the output/* is updated (run ./script/server to generate static files). Run `git subtree push --prefix output origin gh-pages` to push the folder output to branch gh-pages.
