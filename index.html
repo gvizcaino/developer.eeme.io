@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>GitHub Developer | GitHub Developer Guide</title>
+  <title>EEme API v1 | GitHub Developer Guide</title>
   
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   
@@ -18,7 +18,7 @@
 </head>
 
 
-<body class="overview">
+<body>
   
 
 <div id="header-wrapper">
@@ -26,102 +26,298 @@
     <div>
       <a class="logo" href="/">EEme:Developer</a>
       <ul class="nav">
-        
-        <li><a href="/v1/" class="nav-api">API</a></li>
-        <li><a href="/program/" class="nav-developers">Developers</a></li>
-        <li><a href="/changes/" class="nav-blog">Blog</a></li>
-        <li><a href="https://github.com/contact">Support</a></li>
-        <li id="search-container">
-          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" /><label class="search-placeholder">Search</label>
-          <div class="cancel-search"></div>
-          <ul id="search-results">
-
-          </ul>
-        </li>
       </ul>
     </div>
   </div><!-- #header -->
 </div><!-- #header-wrapper -->
 
 
-  <div class="wrapper feature">
-  <h1>
-<a id="----leverage-the-power-of----github-in-your-app--" class="anchor" href="#----leverage-the-power-of----github-in-your-app--" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-    Leverage the power of<br>
-    GitHub in your app.
-  </h1>
-  <p class="intro">Get started with one of our guides, or jump straight into the API documentation.</p>
-  <a href="/v3/" class="button">Browse the documentation</a>
-  <img src="/assets/images/rocketship.png" class="rocketship" alt="Rocketship">
-</div>
+  <div id="wrapper">
+    <div class="content">
+      <h1>
+<a id="eeme-disaggrgation-api" class="anchor" href="#eeme-disaggrgation-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>EEme Disaggrgation API</h1>
 
-<div class="full-width dev-program-callout">
-  <div class="wrapper">
-    <h2>
-<a id="join-the-github-developer-program" class="anchor" href="#join-the-github-developer-program" aria-hidden="true"><span class="octicon octicon-link"></span></a>Join the GitHub Developer Program.</h2>
-    <p>The best way to integrate with GitHub. <a href="/program/">Learn more</a>.</p>
-  </div>
-</div>
+<ul id="markdown-toc">
+<li><a href="#current-version" id="markdown-toc-current-version">Current Version</a></li>
+<li><a href="#authentication" id="markdown-toc-authentication">Authentication</a></li>
+<li><a href="#error-handling" id="markdown-toc-error-handling">Error Handling</a></li>
+<li><a href="#create-a-disaggregation-task" id="markdown-toc-create-a-disaggregation-task">Create a disaggregation task</a></li>
+<li><a href="#list-disaggregation-tasks" id="markdown-toc-list-disaggregation-tasks">List disaggregation tasks</a></li>
+<li><a href="#get-the-disaggregation-result" id="markdown-toc-get-the-disaggregation-result">Get the disaggregation result</a></li>
+<li><a href="#usage-file-format" id="markdown-toc-usage-file-format">Usage File Format</a></li>
+<li><a href="#analytics-configuration" id="markdown-toc-analytics-configuration">Analytics Configuration</a></li>
+</ul>
 
-<div class="full-width-divider">
-  <ul class="wrapper highlights">
-    <li class="highlight-module">
-      <a href="/guides/"><span class="mega-octicon octicon-file-text"></span></a>
-      <h2>
-<a id="get-started" class="anchor" href="#get-started" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/guides/">Get Started</a>
-</h2>
-      <p>New to the GitHub API? With these guides you’ll be up and running in a snap.</p>
-    </li>
-    <li class="highlight-module">
-      <a href="/libraries/"><span class="mega-octicon octicon-code"></span></a>
-      <h2>
-<a id="libraries" class="anchor" href="#libraries" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="/libraries/">Libraries</a>
-</h2>
-      <p>We’ve got you covered. Use the GitHub API in your favorite language.</p>
-    </li>
-    <li class="highlight-module">
-      <a href="http://github.com/contact"><span class="mega-octicon octicon-mail-read"></span></a>
-      <h2>
-<a id="support" class="anchor" href="#support" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://github.com/contact">Support</a>
-</h2>
-      <p>Are you stuck? Already tried our <a href="/v3/troubleshooting/">troubleshooting guide</a>? Talk to a supportocat.</p>
-    </li>
-  </ul>
-</div>
+<h2>
+<a id="current-version" class="anchor" href="#current-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Version</h2>
+
+<p>Currently we only provide <strong>v1</strong>.</p>
+
+<h2>
+<a id="authentication" class="anchor" href="#authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authentication</h2>
+
+<h3>
+<a id="api-key-sent-in-a-header" class="anchor" href="#api-key-sent-in-a-header" aria-hidden="true"><span class="octicon octicon-link"></span></a>API Key (sent in a header)</h3>
+
+<pre class="command-line">
+<span class="command">curl -H "Authorization: Bearer {your api key}" https://api.energyefficiency.me</span>
+</pre>
+
+<h2>
+<a id="error-handling" class="anchor" href="#error-handling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Error Handling</h2>
+
+<p>If an error occurred, in addition to the status code provided in the header portion of the HTTP response, the HTTP response body contains an error object which provides more details on the specific cause of the error and how to resolve it.</p>
+
+<pre><code>{
+    "error": {
+        "code": ERROR_CODE,
+        "message": "Something bad happened",
+        "description": "Here are more details about what happened"
+    }
+}
+</code></pre>
+
+<h2>
+<a id="create-a-disaggregation-task" class="anchor" href="#create-a-disaggregation-task" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create a disaggregation task</h2>
+
+<pre><code>POST /home
+</code></pre>
+
+<h3>
+<a id="input" class="anchor" href="#input" aria-hidden="true"><span class="octicon octicon-link"></span></a>Input</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>usage</code></td>
+<td><code>file</code></td>
+<td>
+<strong>Required</strong>. A csv file that contains usage data and time/location information.</td>
+</tr>
+<tr>
+<td><code>config_id</code></td>
+<td><code>int</code></td>
+<td>The configuration of disaggregation See <a href="#analytics-configuration">configuration</a>
+</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="curl-example" class="anchor" href="#curl-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Curl Example</h3>
+
+<pre class="command-line">
+<span class="command">curl -0 -X POST \</span>
+        -H "Authorization: Bearer {api key}" \
+        -F "usage=@usage.csv" \
+        -F "config_id=2" \
+        https://api.energyefficiency.me/v1/home
+</pre>
+
+<h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"home_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f9be1fd7-e288-4b4d-8570-1497d8fce2e3"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yes"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="list-disaggregation-tasks" class="anchor" href="#list-disaggregation-tasks" aria-hidden="true"><span class="octicon octicon-link"></span></a>List disaggregation tasks</h2>
+
+<pre><code>GET /home
+</code></pre>
+
+<h3>
+<a id="curl-example-1" class="anchor" href="#curl-example-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Curl Example</h3>
+
+<pre class="command-line">
+<span class="command">curl -0 -X GET \</span>
+        -H "Authorization: Bearer {api key}" \
+        https://api.energyefficiency.me/v1/home
+</pre>
+
+<h3>
+<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-22 01:37:35"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"samle.csv"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b098acb2-c119-45ae-b237-6de5a6a28f9a"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"process_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.89min"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> 
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-22 01:37:33"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"samle.csv"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cc44a8a8-7a5b-4722-bf0b-193daa777740"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"process_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.62min"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> 
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-22 01:37:32"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"samle.csv"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d13c4b4f-7c69-4e70-b80c-2584ab8e4aa7"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"process_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.27min"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w"> 
+    </span><span class="nt">"paging"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"page_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"total_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="get-the-disaggregation-result" class="anchor" href="#get-the-disaggregation-result" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get the disaggregation result</h2>
+
+<pre><code>GET /home
+</code></pre>
+
+<h3>
+<a id="curl-example-2" class="anchor" href="#curl-example-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Curl Example</h3>
+
+<pre class="command-line">
+<span class="command">curl -0 -X GET \</span>
+        -H "Authorization: Bearer {api key}" \
+        https://api.energyefficiency.me/v1/home/:id
+</pre>
+
+<h3>
+<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"always_on"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.138</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"electric_vehicle"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"hvac"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.343</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"lighting"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.961</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"pool_pump"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"refrigerator"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.135</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01 00:00:00"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"total_load(kwh)"</span><span class="p">:</span><span class="w"> </span><span class="mf">11.942</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"water_heater"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.157</span><span class="w">
+        </span><span class="p">},</span><span class="w"> 
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"always_on"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.091</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"electric_vehicle"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"hvac"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.671</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"lighting"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.768</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"pool_pump"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"refrigerator"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.201</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-02 00:00:00"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"total_load(kwh)"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.807</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"water_heater"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="p">,</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"always_on"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.735</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"electric_vehicle"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"hvac"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.344</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"lighting"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.768</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"pool_pump"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"refrigerator"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.378</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-31 00:00:00"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"total_load(kwh)"</span><span class="p">:</span><span class="w"> </span><span class="mf">11.118</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"water_heater"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.191</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w"> 
+    </span><span class="nt">"home_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"053492d3-75d9-4010-af17-866a742b488a"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+
+<h2>
+<a id="usage-file-format" class="anchor" href="#usage-file-format" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage File Format</h2>
+
+<p>Usage data is in CSV format. It includes the location, timestamp, and meter reading. The first line is used to indicate the location, followed by the meter readings. The minimun length of data is 6 months.</p>
+
+<h3>
+<a id="csv-format" class="anchor" href="#csv-format" aria-hidden="true"><span class="octicon octicon-link"></span></a>CSV format</h3>
+
+<p>location, <zipcode> <country>
+timstamp, meter reading (the unit depends on your analytics configuration)</country></zipcode></p>
+
+<h3>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+
+<p>location,15232 USA<br>
+2016-01-01 00:00:00,0.3523<br>
+2016-01-01 01:00:00,0.38<br>
+2016-01-01 02:00:00,0.4314<br>
+2016-01-01 03:00:00,0.4532<br>
+2016-01-01 04:00:00,0.5686<br>
+2016-01-01 05:00:00,0.5058  </p>
+
+<h2>
+<a id="analytics-configuration" class="anchor" href="#analytics-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Analytics Configuration</h2>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Interval</th>
+<th>Module</th>
+<th>Region</th>
+<th>Space</th>
+<th>Units</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>2</code></td>
+<td><code>15-min</code></td>
+<td>load-disaggregation</td>
+<td>US</td>
+<td>residential</td>
+<td>kwh</td>
+</tr>
+<tr>
+<td><code>6</code></td>
+<td><code>1-hr</code></td>
+<td>load-disaggregation</td>
+<td>US</td>
+<td>residential</td>
+<td>kwh</td>
+</tr>
+<tr>
+<td><code>11</code></td>
+<td><code>15-min</code></td>
+<td>load-disaggregation</td>
+<td>China</td>
+<td>residential</td>
+<td>kwh</td>
+</tr>
+</tbody>
+</table>
+    </div>
+
+    <!---->
+  </div><!-- #wrapper -->
 
     <div id="footer" >
     <div class="lower_footer">
       <ul class="footer-cell">
-        <li><a href="https://github.com/github/developer.github.com#licenses">&copy; 2016 GitHub, Inc.</a></li>
-        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
-        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
-        <li><a href="https://help.github.com/security/">Security</a></li>
-        <li><a href="https://github.com/contact">Contact</a></li>
-      </ul>
-
-      <span class="footer-cell">
-        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
-      </span>
-
-      <ul class="footer-cell">
-        <li><a href="https://status.github.com/">Status</a></li>
-        <li><a href="http://training.github.com/">Training</a></li>
-        <li><a href="http://shop.github.com/">Shop</a></li>
-        <li><a href="https://github.com/blog">Blog</a></li>
-        <li><a href="https://github.com/about">About</a></li>
       </ul>
     </div>
 
   </div><!-- /#footer -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-3769691-37', 'github.com');
-    ga('send', 'pageview');
-  </script>
 
 </body>
 </html>

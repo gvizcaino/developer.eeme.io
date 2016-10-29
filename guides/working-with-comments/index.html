@@ -26,18 +26,6 @@
     <div>
       <a class="logo" href="/">EEme:Developer</a>
       <ul class="nav">
-        
-        <li><a href="/v1/" class="nav-api">API</a></li>
-        <li><a href="/program/" class="nav-developers">Developers</a></li>
-        <li><a href="/changes/" class="nav-blog">Blog</a></li>
-        <li><a href="https://github.com/contact">Support</a></li>
-        <li id="search-container">
-          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" /><label class="search-placeholder">Search</label>
-          <div class="cancel-search"></div>
-          <ul id="search-results">
-
-          </ul>
-        </li>
       </ul>
     </div>
   </div><!-- #header -->
@@ -66,11 +54,11 @@
 <li><a href="#commit-comments" id="markdown-toc-commit-comments">Commit Comments</a></li>
 </ul>
 
-<p>For any Pull Request, EEme provides three kinds of comment views:
+<p>For any Pull Request, GitHub provides three kinds of comment views:
 <a href="https://github.com/octocat/Spoon-Knife/pull/1176#issuecomment-24114792">comments on the Pull Request</a> as a whole, <a href="https://github.com/octocat/Spoon-Knife/pull/1176#discussion_r6252889">comments on a specific line</a> within the Pull Request,
 and <a href="https://github.com/octocat/Spoon-Knife/commit/cbc28e7c8caee26febc8c013b0adfb97a4edd96e#commitcomment-4049848">comments on a specific commit</a> within the Pull Request.</p>
 
-<p>Each of these types of comments goes through a different portion of the EEme API.
+<p>Each of these types of comments goes through a different portion of the GitHub API.
 In this guide, we'll explore how you can access and manipulate each one. For every
 example, we'll be using <a href="https://github.com/octocat/Spoon-Knife/pull/1176">this sample Pull Request made</a> on the "octocat"
 repository. As always, samples can be found in <a href="https://github.com/github/platform-samples/tree/master/api/ruby/working-with-comments">our platform-samples repository</a>.</p>
@@ -201,36 +189,10 @@ on the entire commit.</p>
     <div id="footer" >
     <div class="lower_footer">
       <ul class="footer-cell">
-        <li><a href="https://github.com/github/developer.github.com#licenses">&copy; 2016 GitHub, Inc.</a></li>
-        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
-        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
-        <li><a href="https://help.github.com/security/">Security</a></li>
-        <li><a href="https://github.com/contact">Contact</a></li>
-      </ul>
-
-      <span class="footer-cell">
-        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
-      </span>
-
-      <ul class="footer-cell">
-        <li><a href="https://status.github.com/">Status</a></li>
-        <li><a href="http://training.github.com/">Training</a></li>
-        <li><a href="http://shop.github.com/">Shop</a></li>
-        <li><a href="https://github.com/blog">Blog</a></li>
-        <li><a href="https://github.com/about">About</a></li>
       </ul>
     </div>
 
   </div><!-- /#footer -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-3769691-37', 'github.com');
-    ga('send', 'pageview');
-  </script>
 
 </body>
 </html>

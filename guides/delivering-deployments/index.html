@@ -26,18 +26,6 @@
     <div>
       <a class="logo" href="/">EEme:Developer</a>
       <ul class="nav">
-        
-        <li><a href="/v1/" class="nav-api">API</a></li>
-        <li><a href="/program/" class="nav-developers">Developers</a></li>
-        <li><a href="/changes/" class="nav-blog">Blog</a></li>
-        <li><a href="https://github.com/contact">Support</a></li>
-        <li id="search-container">
-          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" /><label class="search-placeholder">Search</label>
-          <div class="cancel-search"></div>
-          <ul id="search-results">
-
-          </ul>
-        </li>
       </ul>
     </div>
   </div><!-- #header -->
@@ -66,7 +54,7 @@
 <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ul>
 
-<p>The <a href="/v3/repos/deployments/">Deployments API</a> provides your projects hosted on EEme with
+<p>The <a href="/v3/repos/deployments/">Deployments API</a> provides your projects hosted on GitHub with
 the capability to launch them on a server that you own. Combined with
 <a href="/guides/building-a-ci-server">the Status API</a>, you'll be able to coordinate your deployments
 the moment your code lands on <code>master</code>.</p>
@@ -131,7 +119,7 @@ Great! Click on <strong>Let me select individual events.</strong>, and select th
 <li>Pull Request</li>
 </ul>
 
-<p>These are the events EEme will send to our server whenever the relevant action
+<p>These are the events GitHub will send to our server whenever the relevant action
 occurs. We'll configure our server to <em>just</em> handle when Pull Requests are merged
 right now:</p>
 
@@ -148,7 +136,7 @@ right now:</p>
 </code></pre>
 
 
-<p>What's going on? Every event that EEme sends out attached a <code>X-GitHub-Event</code>
+<p>What's going on? Every event that GitHub sends out attached a <code>X-GitHub-Event</code>
 HTTP header. We'll only care about the PR events for now. When a pull request is
 merged (its state is <code>closed</code>, and <code>merged</code> is <code>true</code>), we'll kick off a deployment.</p>
 
@@ -276,36 +264,10 @@ You can always rely on <a href="https://github.com/integrations">GitHub integrat
     <div id="footer" >
     <div class="lower_footer">
       <ul class="footer-cell">
-        <li><a href="https://github.com/github/developer.github.com#licenses">&copy; 2016 GitHub, Inc.</a></li>
-        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
-        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
-        <li><a href="https://help.github.com/security/">Security</a></li>
-        <li><a href="https://github.com/contact">Contact</a></li>
-      </ul>
-
-      <span class="footer-cell">
-        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
-      </span>
-
-      <ul class="footer-cell">
-        <li><a href="https://status.github.com/">Status</a></li>
-        <li><a href="http://training.github.com/">Training</a></li>
-        <li><a href="http://shop.github.com/">Shop</a></li>
-        <li><a href="https://github.com/blog">Blog</a></li>
-        <li><a href="https://github.com/about">About</a></li>
       </ul>
     </div>
 
   </div><!-- /#footer -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-3769691-37', 'github.com');
-    ga('send', 'pageview');
-  </script>
 
 </body>
 </html>

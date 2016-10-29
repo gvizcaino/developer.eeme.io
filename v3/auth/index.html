@@ -26,18 +26,6 @@
     <div>
       <a class="logo" href="/">EEme:Developer</a>
       <ul class="nav">
-        
-        <li><a href="/v1/" class="nav-api">API</a></li>
-        <li><a href="/program/" class="nav-developers">Developers</a></li>
-        <li><a href="/changes/" class="nav-blog">Blog</a></li>
-        <li><a href="https://github.com/contact">Support</a></li>
-        <li id="search-container">
-          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" /><label class="search-placeholder">Search</label>
-          <div class="cancel-search"></div>
-          <ul id="search-results">
-
-          </ul>
-        </li>
       </ul>
     </div>
   </div><!-- #header -->
@@ -62,7 +50,7 @@
 recommend using <a href="/v3/oauth/">OAuth</a> for production applications. The other
 methods provided are intended to be used for scripts or testing (i.e., cases
 where full OAuth would be overkill). Third party applications that rely on
-EEme for authentication should not ask for or collect EEme credentials.
+GitHub for authentication should not ask for or collect GitHub credentials.
 Instead, they should use the <a href="/v3/oauth">OAuth web flow</a>.</p>
 
 <h2>
@@ -72,22 +60,22 @@ Instead, they should use the <a href="/v3/oauth">OAuth web flow</a>.</p>
 <a href="http://www.ietf.org/rfc/rfc2617.txt">RFC2617</a> with a few slight differences.
 The main difference is that the RFC requires unauthenticated requests to be
 answered with <code>401 Unauthorized</code> responses. In many places, this would disclose
-the existence of user data. Instead, the EEme API responds with <code>404 Not Found</code>.
+the existence of user data. Instead, the GitHub API responds with <code>404 Not Found</code>.
 This may cause problems for HTTP libraries that assume a <code>401 Unauthorized</code>
 response. The solution is to manually craft the <code>Authorization</code> header.</p>
 
 <h3>
 <a id="via-username-and-password" class="anchor" href="#via-username-and-password" aria-hidden="true"><span class="octicon octicon-link"></span></a>Via Username and Password</h3>
 
-<p>To use Basic Authentication with the EEme API, simply send the username and
+<p>To use Basic Authentication with the GitHub API, simply send the username and
 password associated with the account.</p>
 
 <p>For example, if you're accessing the API via <a href="http://curl.haxx.se/">cURL</a>, the following command
-would authenticate you if you replace <code>&lt;username&gt;</code> with your EEme username.
+would authenticate you if you replace <code>&lt;username&gt;</code> with your GitHub username.
 (cURL will prompt you to enter the password.)</p>
 
 <pre class="command-line">
-<span class="command">curl -u <em>username</em> https://api.energyefficiency.m1/user</span>
+<span class="command">curl -u <em>username</em> https://api.energyefficiency.me/user</span>
 </pre>
 
 <h3>
@@ -97,7 +85,7 @@ would authenticate you if you replace <code>&lt;username&gt;</code> with your EE
 tokens</a> or OAuth tokens instead of your password.</p>
 
 <pre class="command-line">
-<span class="command">curl -u <em>username</em>:<em>token</em> https://api.energyefficiency.m1/user</span>
+<span class="command">curl -u <em>username</em>:<em>token</em> https://api.energyefficiency.me/user</span>
 </pre>
 
 <p>This approach is useful if your tools only support Basic Authentication but you
@@ -123,59 +111,16 @@ token to <a href="/v3/#authentication">authenticate via OAuth</a> for most API a
 <p>Alternately, you can create access tokens from the Personal Access Token <a href="https://github.com/settings/tokens">settings page</a>.</p>
     </div>
 
-    <div id="js-sidebar" class="sidebar-shell">
-  <div class="js-toggle-list sidebar-module expandable">
-    <ul>
-      <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/">Overview</a></h3>
-        <ul class="js-guides">
-          <li><a href="/v3/media/">Media Types</a></li>
-          <li><a href="/v3/oauth/">OAuth</a></li>
-          <li><a href="/v3/oauth_authorizations/">OAuth Authorizations API</a></li>
-          <li><a href="/v3/auth/">Other Authentication Methods</a></li>
-          <li><a href="/v3/troubleshooting/">Troubleshooting</a></li>
-          <li><a href="/v3/versions/">Versions</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div> <!-- /sidebar-module -->
-</div><!-- /sidebar-shell -->
-
+    
   </div><!-- #wrapper -->
 
     <div id="footer" >
     <div class="lower_footer">
       <ul class="footer-cell">
-        <li><a href="https://github.com/github/developer.github.com#licenses">&copy; 2016 GitHub, Inc.</a></li>
-        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
-        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
-        <li><a href="https://help.github.com/security/">Security</a></li>
-        <li><a href="https://github.com/contact">Contact</a></li>
-      </ul>
-
-      <span class="footer-cell">
-        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
-      </span>
-
-      <ul class="footer-cell">
-        <li><a href="https://status.github.com/">Status</a></li>
-        <li><a href="http://training.github.com/">Training</a></li>
-        <li><a href="http://shop.github.com/">Shop</a></li>
-        <li><a href="https://github.com/blog">Blog</a></li>
-        <li><a href="https://github.com/about">About</a></li>
       </ul>
     </div>
 
   </div><!-- /#footer -->
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-3769691-37', 'github.com');
-    ga('send', 'pageview');
-  </script>
 
 </body>
 </html>
